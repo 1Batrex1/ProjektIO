@@ -4,22 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table
+
+
+@Table(name = "budynek_sala")
 @Entity
 @Data
 @NoArgsConstructor
 public class BudynekSala {
-
-    @Id
-    @OneToOne
-    @JoinColumn(name = "id_budynku")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Budynek idBudynku;
-
-
-    @Id
-    @OneToOne
-    @JoinColumn(name = "id_sali")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Sala idSali;
+    //naprawić to jebane gówno z kluczem łączonym
+    @EmbeddedId
+    private BudynekSalaId id;
 }

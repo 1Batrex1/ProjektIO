@@ -4,15 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Table
-@NoArgsConstructor
+@Entity
 @Data
+@NoArgsConstructor
 public class Budynek {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_budynku")
     private int idBudynku;
-
 }
