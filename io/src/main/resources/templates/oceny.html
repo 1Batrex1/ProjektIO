@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oceny</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<p>test</p>
+<tbody>
+    <tr th:each="tempOcena : ${listaOcen}">
+
+        <td th:text="${tempOcena.id_studenta}" />
+        <td th:text="${tempOcena.id_przedmiotu}" />
+        <td th:text="${tempOcena.id_wykladowcy}" />
+        <td th:text="${tempOcena.waga}" />
+        <td th:text="${tempOcena.uwagi}" />
+        <td th:text="${tempOcena.typ}" />
+    </tr>
+</tbody>
+
+</body>
+</html>

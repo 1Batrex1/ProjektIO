@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import projekt.edziekanat.io.controlers.SecurityControler;
 
 import javax.sql.DataSource;
 
@@ -30,11 +29,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain (HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests(
-                configurer ->
+    public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests( configurer ->
                         configurer
-                                .requestMatchers(HttpMethod.GET,"/**").hasRole("STUDENT")
+                                .requestMatchers(HttpMethod.GET,"/").hasRole("STUDENT")
+                                .requestMatchers(HttpMethod.GET, "/sprawdz-oceny/**").hasRole("STUDENT")
+                                .anyRequest().authenticated()
 
 
         );
