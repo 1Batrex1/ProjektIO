@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "Student")
@@ -29,4 +31,6 @@ public class Student {
     @JoinColumn(name = "id_osoba")
     private Osoba osoba;
 
+    @OneToMany(mappedBy = "student")
+    List<Ocena> ocena;
 }

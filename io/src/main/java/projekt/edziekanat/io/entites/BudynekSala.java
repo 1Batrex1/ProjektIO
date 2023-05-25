@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class BudynekSala {
-    //naprawić to jebane gówno z kluczem łączonym
+
     @EmbeddedId
     private BudynekSalaId id;
 }
