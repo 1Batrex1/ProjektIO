@@ -24,11 +24,9 @@ public class Ocena {
     @Column(name = "typ")
     private String typ;
 
-
     @ManyToOne
     @JoinColumn(name ="id_studenta")
     Student student;
-
 
     @ManyToOne
     @JoinColumn(name ="id_przedmiotu")
@@ -38,16 +36,4 @@ public class Ocena {
     @JoinColumn(name ="id_wykladowcy")
     Wykladowca wykladowca;
 
-    @Override
-    public String toString() {
-        return "Ocena{" +
-                "id=" + id +
-                ", waga=" + waga +
-                ", uwaga='" + uwaga + '\'' +
-                ", typ='" + typ + '\'' +
-                ", student=" + student +
-                ", przedmiot=" + przedmiot +
-                ", wykladowca=" + wykladowca +
-                '}';
-    }
 }

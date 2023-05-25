@@ -8,16 +8,16 @@
 <body>
 <p>test</p>
 <tbody>
-<!--<tr th:each="tempOcena : ${listaOcen}">
+<tr th:each="tempOcena : ${listaOcen}">
 
 
-    <td th:text="${tempOcena.id_studenta}" />
-    <td th:text="${tempOcena.id_przedmiotu}" />
-    <td th:text="${tempOcena.id_wykladowcy}" />
-    <td th:text="${tempOcena.waga}" />
-    <td th:text="${tempOcena.uwagi}" />
-    <td th:text="${tempOcena.typ}" />
-    </tr>-->
+    <td th:text="${tempOcena.getStudent().getIndexStudenta()}" />
+    <td th:text="${tempOcena.getPrzedmiot().getIdPrzedmiotu()}" />
+    <td th:text="${tempOcena.getWykladowca().getIndexWykladowcy()}" />
+    <td th:text="${tempOcena.getWaga()}" />
+    <td th:text="${tempOcena.getUwaga()}" />
+    <td th:text="${tempOcena.getTyp()}" />
+    </tr>
 </tbody>
 
 </body>

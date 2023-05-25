@@ -33,4 +33,14 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     List<Ocena> ocena;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "indexStudenta=" + indexStudenta +
+                ", semestr=" + semestr +
+                ", rok=" + rok +
+                ", specjalnosc='" + specjalnosc + '\'' +
+                '}';
+    }
 }
