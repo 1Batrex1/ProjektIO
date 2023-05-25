@@ -24,7 +24,7 @@
 
 <!-- Sprawdzenie ocen studenta -->
 <div sec:authorize="hasRole('STUDENT')">
-    <form action="#" th:action="@{/sprawdz-oceny/50970}" method="GET">
+    <form action="#" th:action="@{/sprawdz-oceny}" method="GET">
         <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Oceny"/>
     </form>
 </div>
