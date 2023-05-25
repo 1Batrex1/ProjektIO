@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -30,14 +31,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests( configurer ->
+        http.authorizeHttpRequests(configurer ->
                         configurer
                                 .requestMatchers(HttpMethod.GET,"/").hasRole("STUDENT")
                                 .requestMatchers(HttpMethod.GET, "/sprawdz-oceny/**").hasRole("STUDENT")
                                 .anyRequest().authenticated()
 
 
-        );
+        ).formLogin(form ->
+                form
+                        .loginPage("/showLoginPage")
+                        .loginProcessingUrl("/authenticateTheUser")
+                        .permitAll()
+        )
+                .logout(LogoutConfigurer::permitAll)
+                .exceptionHandling(configurer -> configurer
+                        .accessDeniedPage("/access-denied"))
+        ;
 
         http.httpBasic();
 
@@ -45,4 +55,6 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+
 }
