@@ -6,17 +6,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-<p>test</p>
+
 <tbody >
 <tr th:each="tempOcena : ${listaOcen}">
 
-
-    <td th:text="${tempOcena.getStudent().getIndexStudenta()}" />
-    <td th:text="${tempOcena.getPrzedmiot().getIdPrzedmiotu()}" />
-    <td th:text="${tempOcena.getWykladowca().getIndexWykladowcy()}" />
-    <td th:text="${tempOcena.getWaga()}" />
-    <td th:text="${tempOcena.getUwaga()}" />
-    <td th:text="${tempOcena.getTyp()}" />
+    <!-- <td th:text="${tempOcena.getStudent().getIndexStudenta()}" /> -->
+    <hr>
+    Przedmiot: <td th:text="${tempOcena.getPrzedmiot().getNazwaPrzedmiotu()}" /><br>
+    Wystawiający: <td th:text="${tempOcena.getWykladowca().getOsoba().getImie()}" />
+                   <td th:text="${tempOcena.getWykladowca().getOsoba().getNazwisko()}" /><br>
+    <!-- Brakuje pola wartosc oceny -->
+    Waga oceny: <td th:text="${tempOcena.getWaga()}" /><br>
+    Typ oceny: <td th:text="${tempOcena.getTyp()}" /><br>
+    Uwagi: <td th:text="${tempOcena.getUwaga()}" /><br>
+    <hr>
     </tr>
 </tbody>
 

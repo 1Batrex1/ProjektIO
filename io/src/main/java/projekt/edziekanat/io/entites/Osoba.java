@@ -16,7 +16,7 @@ public class Osoba {
     private int id;
 
     @Column(name = "imię")
-    private String imię;
+    private String imie;
 
 
     @Column(name = "nazwisko")

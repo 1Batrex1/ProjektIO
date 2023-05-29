@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class Ocena {
 
+    // Brakuje pola "wartosc oceny"
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_oceny")
