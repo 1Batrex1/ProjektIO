@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "grupa")
 @NoArgsConstructor
@@ -18,4 +20,10 @@ public class Grupa {
     @ManyToOne
     @JoinColumn(name = "id_wykladowcy")
     private Wykladowca wykladowca;
+
+    @OneToMany(mappedBy = "grupa")
+    List<Student> studentList;
+
+
+
 }
