@@ -25,11 +25,27 @@
             </select>
 
             <p>Wybierz Datę</p>
-            <input type="datetime-local" name="data" id="data"/>
+            <input type="datetime-local" name="data" id="data" onchange="validateTime(this)"/>
 
             <br>
             <button type="submit">Save</button>
 
+
+
         </form>
+
+        <script>
+            function validateTime(input) {
+                var selectedDate = new Date(input.value);
+                var selectedHour = selectedDate.getHours();
+
+                var allowedHours = [8, 10, 12, 14, 16, 18];
+
+                if (!allowedHours.includes(selectedHour)) {
+                    alert("Dozwolone godziny rozpoczęcia zajęć to :" + allowedHours);
+                    input.value = ""; // Usuwa wybraną wartość
+                }
+            }
+        </script>
 </body>
 </html>
