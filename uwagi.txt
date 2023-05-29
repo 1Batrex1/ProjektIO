@@ -1,5 +1,4 @@
 - brakuje w ocenie wartosci oceny
-- usunac polskie znaki ze zmiennych w programie i bazie danych bo wystepuja dziwne bledy wtedy
-
-- najpierw wybierac w "wybor-przedmiotu-do-wyswietlenia-ocen.html" z listy z jakiego przedmiotu wyswietlic oceny, potem przekierowac na "oceny.html" i wyswietlac tam tylko oceny z tego przedmiotu
-- dodac jeszcze potem wybor na oceny koncowe i czastkowe
+- usunac polskie znaki ze zmiennych w programie
+- dodac wybor na oceny koncowe i czastkowe
+- naprawic wybor grupy u wykladowcy podczas wystawiania ocen

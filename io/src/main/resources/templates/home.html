@@ -24,35 +24,34 @@
 
 <!-- Sprawdzenie ocen studenta -->
 <div sec:authorize="hasRole('STUDENT')">
-    <form action="#" th:action="@{/sprawdz-oceny}" method="GET">
+    <form action="#" th:action="@{/wybierzPrzedmiot}" method="GET">
         <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Oceny"/>
     </form>
 </div>
 
 <!-- Wystawienie ocen przez wykładowcę -->
-<div sec:authorize="hasRole('WYKLADOWCA')">
-    <p>
-        <a th:href="@{/wystawienie_ocen}">Wystaw ocenę</a>
-    </p>
-</div>
+<div sec:authorize="hasRole('WYKŁADOWCA')">
+    <form action="#" th:action="@{/wybierzGrupe}" method="GET" style="float: left; margin-left: 2%">
+        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Wystawianie ocen"/>
+    </form>
 
 <!-- Sprawdzenie grafiku zajęć przez wykładowcę -->
-<div sec:authorize="hasRole('WYKLADOWCA')">
-    <p>
-        <a th:href="@{/grafik}">Grafik zajęć</a>
-    </p>
+    <form action="#" th:action="@{/grafik}" method="GET" style="float: left; margin-left: 2%">
+        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Grafik zajęć"/>
+    </form>
 </div>
 
 <!-- Ustalanie planu zajęć przez pracownika dziekanatu -->
 <div sec:authorize="hasRole('PRACOWNIK_DZIEKANATU')">
-    <p>
-        <a th:href="@{/ustalanie_planu}">Ustal plan zajęć</a>
-    </p>
+    <form action="#" th:action="@{/ustalaniePlanu}" method="GET">
+        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Ustal plan zajęć"/>
+    </form>
 </div>
 
 <br>
 
 <!-- Add o logout button -->
+<br>
 <form action="#" th:action="@{/logout}" method="POST">
     <input type="submit" style="margin-left: 50%" class="btn btn-danger" value="Wyloguj się"/>
 </form>

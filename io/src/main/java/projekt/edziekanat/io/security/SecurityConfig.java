@@ -20,10 +20,10 @@ public class SecurityConfig {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "select id_osoba,haslo,aktywne from osoba where cast(id_osoba as varchar) = ?"
+                "SELECT id_osoba, haslo, aktywne FROM osoba WHERE CAST(id_osoba as varchar) = ?"
         );
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-                "select id_osoba,rola from rola where cast(id_osoba as varchar) = ?"
+                "SELECT id_osoba, rola FROM rola WHERE CAST(id_osoba as varchar) = ?"
         );
 
         return jdbcUserDetailsManager;
@@ -33,9 +33,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers(HttpMethod.GET,"/").hasAnyRole("STUDENT")
+                                .requestMatchers(HttpMethod.GET,"/").hasAnyRole("STUDENT", "WYKŁADOWCA")
                                 .requestMatchers(HttpMethod.GET, "/sprawdz-oceny/**").hasRole("STUDENT")
                                 .requestMatchers(HttpMethod.GET, "/wybor-przedmiotu/**").hasRole("STUDENT")
+                                .requestMatchers(HttpMethod.GET, "/wybierzGrupe/**").hasRole("WYKŁADOWCA")
                                 .anyRequest().authenticated()
 
 

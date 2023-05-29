@@ -6,7 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-
 <tbody >
 <tr th:each="tempOcena : ${listaOcen}">
 
@@ -22,6 +21,10 @@
     <hr>
     </tr>
 </tbody>
+
+<form action="#" th:action="@{/wybierzPrzedmiot}" method="GET">
+    <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Powrót"/>
+</form>
 
 </body>
 </html>

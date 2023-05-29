@@ -3,16 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Oceny</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-    <form action="#">
-        <select name="wybor-przedmiotu">
-            <tbody >
-                <tr th:each="tempPrzedmiot : ${listaPrzedmiotow}">
-                    <td th:option="${tempPrzedmiot.getNazwaPrzedmiotu()}"/>
-                </tr>
-            </tbody>
-        </select>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Nazwa przedmiotu</th>
+            <th>ECTS</th>
+            <th>Wybór</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempPrzedmiot : ${listaPrzedmiotow}">
+
+            <td th:text="${tempPrzedmiot.getNazwaPrzedmiotu()}" />
+            <td th:text="${tempPrzedmiot.getEcts()}" />
+
+            <td>
+                <a th:href="@{/wyswietlOceny(przedmiotId=${tempPrzedmiot.getIdPrzedmiotu()})}"
+                   class="btn btn-info btn-sm">
+                    Wybierz
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Powrót"/>
     </form>
+
 </body>
 </html>

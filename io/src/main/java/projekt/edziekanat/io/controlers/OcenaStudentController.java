@@ -8,17 +8,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import projekt.edziekanat.io.dao.OcenaRepository;
 import projekt.edziekanat.io.dao.StudentRepository;
 import projekt.edziekanat.io.entites.Ocena;
 import projekt.edziekanat.io.entites.Przedmiot;
 import projekt.edziekanat.io.entites.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class OcenaController {
+public class OcenaStudentController {
 
     StudentRepository studentRepository;
 
@@ -27,7 +29,7 @@ public class OcenaController {
     EntityManager entityManager;
 
     @Autowired
-    OcenaController(OcenaRepository ocenaRepository, StudentRepository studentRepository, EntityManager entityManager)
+    OcenaStudentController(OcenaRepository ocenaRepository, StudentRepository studentRepository, EntityManager entityManager)
     {
         this.ocenaRepository = ocenaRepository;
         this.studentRepository = studentRepository;
@@ -35,20 +37,29 @@ public class OcenaController {
     }
 
 
-    @GetMapping("/sprawdz-oceny")
-    public String wyswietlOceny(Model theModel) {
+    @GetMapping("/wyswietlOceny")
+    public String wyswietlOceny(@RequestParam("przedmiotId") int theId, Model theModel) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<Student> student = studentRepository.findByOsoba_Id(Integer.valueOf(authentication.getName()));
+
+
         List<Ocena> ocena = ocenaRepository.findAllByStudent_IndexStudenta(student.get().getIndexStudenta());
-        theModel.addAttribute("listaOcen", ocena);
+        List<Ocena> ocenyPrzedmiotu = new ArrayList<>();
+
+        for (Ocena val: ocena) {
+            if (val.getPrzedmiot().getIdPrzedmiotu() == theId) {
+                ocenyPrzedmiotu.add(val);
+            }
+        }
+
+        theModel.addAttribute("listaOcen", ocenyPrzedmiotu);
 
         return "oceny";
     }
 
-    @GetMapping("/wybor-przedmiotu")
+    @GetMapping("/wybierzPrzedmiot")
     public String wybierzPrzedmiot(Model theModel) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         TypedQuery<Przedmiot> theQuery = entityManager.createQuery("FROM Przedmiot", Przedmiot.class);
         theModel.addAttribute("listaPrzedmiotow", theQuery.getResultList());
 
