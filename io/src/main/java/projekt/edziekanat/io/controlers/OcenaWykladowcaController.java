@@ -8,11 +8,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import projekt.edziekanat.io.dao.OcenaRepository;
-import projekt.edziekanat.io.dao.StudentRepository;
-import projekt.edziekanat.io.dao.WykladowcaRepository;
+import projekt.edziekanat.io.dao.*;
 import projekt.edziekanat.io.entites.Grupa;
 import projekt.edziekanat.io.entites.Wykladowca;
+import projekt.edziekanat.io.entites.Zajecia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,39 +23,42 @@ public class OcenaWykladowcaController {
     OcenaRepository ocenaRepository;
     EntityManager entityManager;
 
+    ZajeciaRepository zajeciaRepository;
+
     @Autowired
     public OcenaWykladowcaController(WykladowcaRepository wykladowcaRepository,
                                      StudentRepository studentRepository,
                                      OcenaRepository ocenaRepository,
+                                     ZajeciaRepository zajeciaRepository,
                                      EntityManager entityManager) {
         this.wykladowcaRepository = wykladowcaRepository;
         this.studentRepository = studentRepository;
         this.ocenaRepository = ocenaRepository;
         this.entityManager = entityManager;
+        this.zajeciaRepository = zajeciaRepository;
     }
 
 
     @GetMapping("/wybierzGrupe")
     public String wybierzGrupe(Model theModel) {
-        TypedQuery<Grupa> theQuery = entityManager.createQuery("FROM Grupa", Grupa.class);
 
-        List<Grupa> listaGrup = new ArrayList<>();
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Wykladowca wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(Integer.parseInt(authentication.getName()));
-        int idWykladowcy = wykladowca.getIndexWykladowcy();
+        Integer idWykladowcy = wykladowca.getIndexWykladowcy();
         System.out.println(idWykladowcy);
+        List<Zajecia> zajeciaList =  zajeciaRepository.findAllByWykladowca_IndexWykladowcy(idWykladowcy);
 
-        for (Grupa grupa: theQuery.getResultList()) {
-            System.out.println(grupa.getWykladowca().getIndexWykladowcy());
-            System.out.println(idWykladowcy);
-            if (grupa.getWykladowca().getIndexWykladowcy() == idWykladowcy) {
-                listaGrup.add(grupa);
-            }
+        List<Grupa> grupaList = new ArrayList<Grupa>();
 
+        for (Zajecia tempZajecia: zajeciaList
+             ) {
+            grupaList.add(tempZajecia.getGrupa());
         }
 
-        System.out.println(listaGrup);
-        theModel.addAttribute("listaGrup", listaGrup);
+
+
+        theModel.addAttribute("listaGrup", grupaList);
 
         return "wybor-grupy";
 

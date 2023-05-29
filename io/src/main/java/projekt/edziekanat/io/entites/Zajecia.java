@@ -31,7 +31,7 @@ public class Zajecia {
     Wykladowca wykladowca;
 
     @ManyToOne
-    @JoinColumn(name = "id_grupa")
+    @JoinColumn(name = "id_grupy")
     Grupa grupa;
 
     //Dodać id sali
