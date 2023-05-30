@@ -51,20 +51,21 @@ public class OcenaWykladowcaController {
 
     @GetMapping("/wybierzZajecia")
     public String wybierzZajecia(Model theModel) {
-        TypedQuery<Zajecia> theQuery = entityManager.createQuery("FROM Zajecia ", Zajecia.class);
 
-        List<Zajecia> listaZajec = new ArrayList<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Wykladowca wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(Integer.parseInt(authentication.getName()));
         int idWykladowcy = wykladowca.getIndexWykladowcy();
-
-       for (Zajecia zajecia: theQuery.getResultList()) {
-            if (zajecia.getWykladowca().getIndexWykladowcy() == idWykladowcy) {
-                listaZajec.add(zajecia);
+        List<Zajecia> zajeciaList = zajeciaRepository.findDistinctByWykladowca_IndexWykladowcy(idWykladowcy);
+        for (int i = 0; i < zajeciaList.size(); i++) {
+            for (int j = 0; j < zajeciaList.size(); j++) {
+                if (zajeciaList.get(i) == zajeciaList.get(j) && zajeciaList.size() > 1) {
+                    zajeciaList.remove(j);
+                }
             }
         }
 
-        theModel.addAttribute("listaZajec", listaZajec);
+
+        theModel.addAttribute("listaZajec", zajeciaList);
 
         return "wybor-zajec";
     }
@@ -87,16 +88,14 @@ public class OcenaWykladowcaController {
     public String formularzOceny(@RequestParam("indexStudenta") int indexStudenta,
                               Model theModel) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        int idWykladowcy = Integer.parseInt(authentication.getName());
+
 
         Ocena ocena = new Ocena();
-        ocena.setId(idOceny);
         ocena.setStudent(studentRepository.findByIndexStudenta(indexStudenta).get());
         ocena.setPrzedmiot(przedmiotRepository.findByIdPrzedmiotu(idPrzedmiotu).get());
         ocena.setWykladowca(wykladowcaRepository.findWykladowcaByOsobaId(idWykladowcy));
 
-        idOceny++;
+
 
         theModel.addAttribute("ocena", ocena);
 
@@ -106,8 +105,13 @@ public class OcenaWykladowcaController {
     @PostMapping("/wystawOcene")
     public String wystawOcene(@ModelAttribute("ocena") Ocena ocena) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int idWykladowcy = Integer.parseInt(authentication.getName());
+
+        ocena.setStudent(studentRepository.findByIndexStudenta(indexStudenta).get());
+        ocena.setPrzedmiot(przedmiotRepository.findByIdPrzedmiotu(idPrzedmiotu).get());
+        ocena.setWykladowca(wykladowcaRepository.findWykladowcaByOsobaId(idWykladowcy));
         // nie dziala dodawanie obiektu do bazy danych
-        ocena.getStudent().getOcena().add(ocena);
         ocenaRepository.save(ocena);
 
         return "redirect:/wybierzZajecia";

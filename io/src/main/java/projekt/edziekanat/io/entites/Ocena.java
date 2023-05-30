@@ -13,7 +13,7 @@ public class Ocena {
     // Brakuje pola "wartosc oceny"
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_oceny")
     private int id;
 
@@ -24,7 +24,7 @@ public class Ocena {
     private String uwaga;
 
     @Column(name = "typ")
-    private String typ;
+    private boolean typ;
 
     @Column(name = "wartość")
     private int wartosc;
