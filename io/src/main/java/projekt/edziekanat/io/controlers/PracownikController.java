@@ -33,19 +33,22 @@ public class PracownikController {
         List<Wykladowca> wykladowcaList= wykladowcaRepository.findAll();
         List<Grupa> grupaList = grupaRepository.findAll();
         List<Przedmiot> przedmiotList = przedmiotRepository.findAll();
+        List<BudynekSala> budynekSalaList = budynekSalaRepository.findAll();
         theModel.addAttribute("Grupy",grupaList);
         theModel.addAttribute("Wykladowcy",wykladowcaList);
         theModel.addAttribute("Przedmioty",przedmiotList);
+        theModel.addAttribute("BudynekSala",budynekSalaList);
         return "ustalanie-planu";
     }
     // Tutaj trzeba dodać ify i zapisać
     @PostMapping("/ustalanie-planu/save")
-    public String zapiszPlan(@RequestParam String wykladowca, @RequestParam String grupa, @RequestParam String przedmiot, @RequestParam String data)
+    public String zapiszPlan(@RequestParam String wykladowca, @RequestParam String grupa, @RequestParam String przedmiot, @RequestParam String data,@RequestParam String budynekSala)
     {
         System.out.println("Selected Wykladowca: " + wykladowca);
         System.out.println("Selected Grupa: " + grupa);
         System.out.println("Selected Przedmiot: " + przedmiot);
         System.out.println("Selected Data: " + data);
+        System.out.println("Selected BudynekSala: " + budynekSala);
 
 
         return "redirect:/";

@@ -34,15 +34,13 @@ public class Zajecia {
     @JoinColumn(name = "id_grupy")
     Grupa grupa;
 
-    //Dodać id sali
 
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "budynekid_budynku",referencedColumnName = "budynekidBudynku"),
-            @JoinColumn(name = "salaid_sali", referencedColumnName = "salaid_sali")
+            @JoinColumn(name = "id_budynku",referencedColumnName = "budynekidBudynku"),
+            @JoinColumn(name = "id_sali",referencedColumnName = "salaid_sali")
     })
     BudynekSala budynekSala;
-    //Dodać id budynku
 
 
 

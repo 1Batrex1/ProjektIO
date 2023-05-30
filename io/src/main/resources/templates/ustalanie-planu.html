@@ -13,6 +13,12 @@
                         th:value="${tempWykladowca.getIndexWykladowcy()}"
                         th:text="${tempWykladowca.getIndexWykladowcy()} + ' ' + ${tempWykladowca.getOsoba().getImie()} + ' ' + ${tempWykladowca.getOsoba().getNazwisko()}"></option>
             </select>
+            <p>Wybierz Budynek i salę</p>
+            <select name="budynekSala">
+                <option th:each="tempBudynekSala : ${BudynekSala}"
+                        th:value="${tempBudynekSala.getId().getSalaid_sali()}+ ' ' + ${tempBudynekSala.getId().getBudynekidBudynku()}"
+                        th:text="'Budynek '  +${tempBudynekSala.getId().getBudynekidBudynku()}+ ' Sala ' + ${tempBudynekSala.getId().getSalaid_sali()} + ' Pojemność ' + ${tempBudynekSala.getPojemnoscSali()}"></option>
+            </select>
 
             <p>Wybierz Grupę</p>
             <select name="grupa">

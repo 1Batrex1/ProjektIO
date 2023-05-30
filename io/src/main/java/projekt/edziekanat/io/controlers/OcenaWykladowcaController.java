@@ -49,9 +49,9 @@ public class OcenaWykladowcaController {
         int idWykladowcy = wykladowca.getIndexWykladowcy();
 
         for (Grupa grupa: theQuery.getResultList()) {
-            if (grupa.getWykladowca().getIndexWykladowcy() == idWykladowcy) {
-                listaGrup.add(grupa);
-            }
+//            if (grupa.getWykladowca().getIndexWykladowcy() == idWykladowcy) {
+//                listaGrup.add(grupa);
+//            }
         }
 
         List<Integer> roki = new ArrayList<>();
@@ -67,7 +67,7 @@ public class OcenaWykladowcaController {
 
     @GetMapping("/listaStudentow")
     public String listaStudentow(@RequestParam("idGrupy") int theId, Model theModel) {
-        List<Student> student = studentRepository.findAllByIdGrupy(theId);
+        List<Student> student = studentRepository.findAllByGrupa(theId);
         theModel.addAttribute("listaStudentow", student);
 
         return "lista-studentow";
