@@ -48,12 +48,18 @@
             function validateTime(input) {
                 var selectedDate = new Date(input.value);
                 var selectedHour = selectedDate.getHours();
-
+                var selectedMinutes = selectedDate.getMinutes();
                 var allowedHours = [8, 10, 12, 14, 16, 18];
+                var allowedMinutes = 00
 
                 if (!allowedHours.includes(selectedHour)) {
                     alert("Dozwolone godziny rozpoczęcia zajęć to :" + allowedHours);
                     input.value = "";
+                }
+                if (allowedMinutes != selectedMinutes)
+                {
+                    alert("Zajęcia mogą rozpoczynać się tylko o pełniej godzinie");
+
                 }
             }
         </script>
