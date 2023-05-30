@@ -1,7 +1,6 @@
 package projekt.edziekanat.io.controlers;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +16,6 @@ import projekt.edziekanat.io.entites.Student;
 import projekt.edziekanat.io.entites.Wykladowca;
 import projekt.edziekanat.io.entites.Zajecia;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,6 +29,7 @@ public class OcenaWykladowcaController {
     EntityManager entityManager;
 
     private int idPrzedmiotu;
+    private int indexStudenta;
     private int idOceny = 1;
 
     @Autowired
@@ -82,20 +81,15 @@ public class OcenaWykladowcaController {
         return "lista-studentow";
     }
 
-
-    // dodac przed jeszcze wyborem grupy wybor przedmiotu i dopiero zaimplementowac metode nizej
     @GetMapping("/formularzOceny")
     public String formularzOceny(@RequestParam("indexStudenta") int indexStudenta,
                               Model theModel) {
 
-
+        this.indexStudenta = indexStudenta;
 
         Ocena ocena = new Ocena();
         ocena.setStudent(studentRepository.findByIndexStudenta(indexStudenta).get());
         ocena.setPrzedmiot(przedmiotRepository.findByIdPrzedmiotu(idPrzedmiotu).get());
-        ocena.setWykladowca(wykladowcaRepository.findWykladowcaByOsobaId(idWykladowcy));
-
-
 
         theModel.addAttribute("ocena", ocena);
 
@@ -111,7 +105,7 @@ public class OcenaWykladowcaController {
         ocena.setStudent(studentRepository.findByIndexStudenta(indexStudenta).get());
         ocena.setPrzedmiot(przedmiotRepository.findByIdPrzedmiotu(idPrzedmiotu).get());
         ocena.setWykladowca(wykladowcaRepository.findWykladowcaByOsobaId(idWykladowcy));
-        // nie dziala dodawanie obiektu do bazy danych
+
         ocenaRepository.save(ocena);
 
         return "redirect:/wybierzZajecia";

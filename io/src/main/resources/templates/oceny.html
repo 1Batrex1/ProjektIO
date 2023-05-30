@@ -8,15 +8,17 @@
 <body>
 <tbody >
 <tr th:each="tempOcena : ${listaOcen}">
-
-    <!-- <td th:text="${tempOcena.getStudent().getIndexStudenta()}" /> -->
     <hr>
     Przedmiot: <td th:text="${tempOcena.getPrzedmiot().getNazwaPrzedmiotu()}" /><br>
     Wystawiający: <td th:text="${tempOcena.getWykladowca().getOsoba().getImie()}" />
                    <td th:text="${tempOcena.getWykladowca().getOsoba().getNazwisko()}" /><br>
     Ocena: <td th:text="${tempOcena.getWartosc()}"></td><br>
     Waga oceny: <td th:text="${tempOcena.getWaga()}" /><br>
-    Typ oceny: <td th:text="${tempOcena.getTyp()}" /><br>
+    <div th:switch="${tempOcena.isTyp()}">
+        <td th:case="true">Typ oceny: Końcowa</td>
+        <td th:case="false">Typ oceny: Cząstkowa</td>
+    </div>
+    Forma zajęć: <td th:text="${tempOcena.getPrzedmiot().getTypZajec()}"></td><br>
     Uwagi: <td th:text="${tempOcena.getUwaga()}" /><br>
     <hr>
     </tr>

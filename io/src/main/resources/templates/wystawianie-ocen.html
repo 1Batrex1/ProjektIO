@@ -18,15 +18,6 @@
     <form action="#" th:action="@{/wystawOcene}"
           th:object="${ocena}" method="POST">
 
-        <!-- Add hidden form field to handle the update -->
-        <!--<input type="hidden" th:field="*{id}">
-
-        <input type="hidden" th:field="*{student}">-->
-
-       <!-- <input type="hidden" th:field="*{przedmiot.getIdPrzedmiotu()}">
-
-        <input type="hidden" th:field="*{wykladowca.getIndexWykladowcy()}">-->
-
         <input type="text" th:field="*{waga}"
                class="form-control mb-4 w-25" placeholder="Waga">
 
