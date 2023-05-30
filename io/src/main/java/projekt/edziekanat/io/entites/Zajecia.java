@@ -31,10 +31,17 @@ public class Zajecia {
     Wykladowca wykladowca;
 
     @ManyToOne
-    @JoinColumn(name = "id_grupa")
+    @JoinColumn(name = "id_grupy")
     Grupa grupa;
 
     //Dodać id sali
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "budynekid_budynku",referencedColumnName = "budynekidBudynku"),
+            @JoinColumn(name = "salaid_sali", referencedColumnName = "salaid_sali")
+    })
+    BudynekSala budynekSala;
     //Dodać id budynku
 
 

@@ -1,4 +1,4 @@
-- brakuje w ocenie wartosci oceny
+- brakuje w ocenie wartosci oceny - to waga jest nie wiem czemu to tak nazwałem
 - usunac polskie znaki ze zmiennych w programie
-- dodac wybor na oceny koncowe i czastkowe
+- dodac wybor na oceny koncowe i czastkowe - jest od tego pole typ
 - naprawic wybor grupy u wykladowcy podczas wystawiania ocen

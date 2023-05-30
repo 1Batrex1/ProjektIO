@@ -37,6 +37,9 @@ public class Student {
     @OneToMany(mappedBy = "student")
     List<Ocena> ocena;
 
+    @ManyToOne
+    @JoinColumn(name = "id_grupy")
+    Grupa grupa;
     @Override
     public String toString() {
         return "Student{" +

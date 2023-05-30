@@ -33,7 +33,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers(HttpMethod.GET,"/").hasAnyRole("STUDENT", "WYKŁADOWCA")
+                                .requestMatchers(HttpMethod.GET,"/").hasAnyRole("STUDENT", "WYKŁADOWCA","PRACOWNIK_DZIEKANATU")
                                 .requestMatchers(HttpMethod.GET, "/sprawdz-oceny/**").hasRole("STUDENT")
                                 .requestMatchers(HttpMethod.GET, "/wybor-przedmiotu/**").hasRole("STUDENT")
                                 .requestMatchers(HttpMethod.GET, "/wybierzGrupe/**").hasRole("WYKŁADOWCA")

@@ -9,13 +9,8 @@ import java.io.Serializable;
 @Data
 public class BudynekSalaId implements Serializable {
 
-    @OneToOne
-    @JoinColumn(name = "id_budynku")
-    private Budynek budynek;
+    private long budynekidBudynku;
 
-    @OneToOne
-    @JoinColumn(name = "id_sali")
-    private Sala sala;
-
+    private long salaid_sali;
 
 }

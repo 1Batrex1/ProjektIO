@@ -21,6 +21,5 @@ public class Wykladowca {
     @JoinColumn(name = "id_osoba")
     private Osoba osoba;
 
-    @OneToMany(mappedBy = "wykladowca")
-    private List<Grupa> grupy;
+
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <form action="#" th:action="@{/ustalanie-planu/save}" th:object="${zajecia}" method="POST">
+
+            <p>Wybierz wykładowcę</p>
+            <select name="wykladowca">
+                <option th:each="tempWykladowca : ${Wykladowcy}"
+                        th:value="${tempWykladowca.getIndexWykladowcy()}"
+                        th:text="${tempWykladowca.getIndexWykladowcy()} + ' ' + ${tempWykladowca.getOsoba().getImie()} + ' ' + ${tempWykladowca.getOsoba().getNazwisko()}"></option>
+            </select>
+
+            <p>Wybierz Grupę</p>
+            <select name="grupa">
+                <option th:each="tempGrupa : ${Grupy}" th:value="${tempGrupa.getIdGrupy()}" th:text="${tempGrupa.getIdGrupy()}"></option>
+            </select>
+
+            <p>Wybierz Przedmiot</p>
+            <select name="przedmiot">
+                <option th:each="tempPrzedmiot : ${Przedmioty}" th:text="${tempPrzedmiot.getNazwaPrzedmiotu()}"></option>
+            </select>
+
+            <p>Wybierz Datę</p>
+            <input type="datetime-local" name="data" id="data" onchange="validateTime(this)"/>
+
+            <br>
+            <button type="submit">Save</button>
+
+
+
+        </form>
+
+        <script>
+            function validateTime(input) {
+                var selectedDate = new Date(input.value);
+                var selectedHour = selectedDate.getHours();
+
+                var allowedHours = [8, 10, 12, 14, 16, 18];
+
+                if (!allowedHours.includes(selectedHour)) {
+                    alert("Dozwolone godziny rozpoczęcia zajęć to :" + allowedHours);
+                    input.value = "";
+                }
+            }
+        </script>
+</body>
+</html>

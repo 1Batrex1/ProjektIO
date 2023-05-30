@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student,Integer> {
-    @Override
-    Optional<Student> findById(Integer integer);
     Optional<Student> findByOsoba_Id(Integer integer);
 
     List<Student> findAllByIdGrupy(Integer integer);

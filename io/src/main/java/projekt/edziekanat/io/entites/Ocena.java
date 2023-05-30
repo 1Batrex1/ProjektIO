@@ -26,6 +26,9 @@ public class Ocena {
     @Column(name = "typ")
     private String typ;
 
+    @Column(name = "wartość")
+    private int wartosc;
+
     @ManyToOne
     @JoinColumn(name ="id_studenta")
     Student student;
