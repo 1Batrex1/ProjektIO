@@ -9,8 +9,9 @@ import java.util.Optional;
 public interface StudentRepository extends JpaRepository<Student,Integer> {
     Optional<Student> findByOsoba_Id(Integer integer);
 
-    List<Student> findAllByGrupa_IdGrupy(Integer integer);
+    List<Student> findAllByGrupa(Integer integer);
 
-    Optional<Student> findByIndexStudenta(Integer integer);
+    List<Student> findAllByGrupa_IdGrupy(Integer grupaId);
 
+    Optional<Student> findByIndexStudenta(Integer indexStudenta);
 }

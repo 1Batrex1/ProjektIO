@@ -14,7 +14,7 @@
     Przedmiot: <td th:text="${tempOcena.getPrzedmiot().getNazwaPrzedmiotu()}" /><br>
     Wystawiający: <td th:text="${tempOcena.getWykladowca().getOsoba().getImie()}" />
                    <td th:text="${tempOcena.getWykladowca().getOsoba().getNazwisko()}" /><br>
-    <!-- Brakuje pola wartosc oceny -->
+    Ocena: <td th:text="${tempOcena.getWartosc()}"></td><br>
     Waga oceny: <td th:text="${tempOcena.getWaga()}" /><br>
     Typ oceny: <td th:text="${tempOcena.getTyp()}" /><br>
     Uwagi: <td th:text="${tempOcena.getUwaga()}" /><br>

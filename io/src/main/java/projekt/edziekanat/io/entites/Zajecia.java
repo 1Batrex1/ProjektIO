@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -15,12 +16,15 @@ public class Zajecia {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_zajęc")
     private int idZajec;
 
     @Column(name = "data")
     Date dataZajec;
+
+    @Column(name = "godzina_zajęć")
+    Time godzinaZajec;
 
     @ManyToOne
     @JoinColumn(name ="id_przedmiotu")
@@ -34,25 +38,14 @@ public class Zajecia {
     @JoinColumn(name = "id_grupy")
     Grupa grupa;
 
-    //Dodać id sali
 
-   /* @ManyToOne
+    @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "budynekidBudynku",referencedColumnName = "Budynekid_budynku"),
-            @JoinColumn(name = "salaid_sali", referencedColumnName = "Salaid_sali")
+            @JoinColumn(name = "id_budynku",referencedColumnName = "budynekidBudynku"),
+            @JoinColumn(name = "id_sali",referencedColumnName = "salaidSali")
     })
-    BudynekSala budynekSala;*/
-    //Dodać id budynku
+    BudynekSala budynekSala;
 
 
-    @Override
-    public String toString() {
-        return "Zajecia{" +
-                "idZajec=" + idZajec +
-                ", dataZajec=" + dataZajec +
-                ", przedmiot=" + przedmiot +
-                ", wykladowca=" + wykladowca +
-                ", grupa=" + grupa +
-                '}';
-    }
+
 }

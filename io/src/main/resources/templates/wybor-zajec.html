@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wybierz zajęcia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+  <tr>
+    <th>Przedmiot</th>
+    <th>Typ zajęć</th>
+    <th>Semestr</th>
+    <th>Grupa</th>
+    <th>Wybór</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr th:each="tempZajecia: ${listaZajec}">
+
+    <td th:text="${tempZajecia.getPrzedmiot().getNazwaPrzedmiotu()}"></td>
+    <td th:text="${tempZajecia.getPrzedmiot().getTypZajec()}"></td>
+    <td th:text="${tempZajecia.getPrzedmiot().getSemestr()}"></td>
+    <td th:text="${tempZajecia.getGrupa().getIdGrupy()}"></td>
+    <td>
+      <a th:href="@{/listaStudentow(idGrupy=${tempZajecia.getGrupa().getIdGrupy()},
+                  idPrzedmiotu=${tempZajecia.getPrzedmiot().getIdPrzedmiotu()})}"
+                  class="btn btn-info btn-sm">
+        Wybierz
+      </a>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
+
+<form action="#" th:action="@{/}" method="GET">
+  <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Powrót"/>
+</form>
+
+</body>
+</html>
