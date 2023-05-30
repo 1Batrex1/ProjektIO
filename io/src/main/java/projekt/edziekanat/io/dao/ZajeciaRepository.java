@@ -13,7 +13,7 @@ public interface ZajeciaRepository extends JpaRepository<Zajecia,Integer> {
     List<Zajecia> findAllByWykladowca_IndexWykladowcy(Integer integer);
     Optional<Zajecia> findByWykladowca_IndexWykladowcyAndDataZajecEqualsAndGodzinaZajecEquals(Integer integer, Date date, Time time);
 
-    Optional<Zajecia> findByBudynekSala_Id_BudynekidBudynkuAndBudynekSala_Id_SalaidSaliAndDataZajecEqualsAndGodzinaZajecEquals(Integer integer1,Integer integer2,Date date,Time time);
+    Optional<Zajecia> findByBudynekSala_Id_BudynekidBudynkuAndBudynekSala_Id_SalaidSaliAndDataZajecEqualsAndGodzinaZajecEquals(long budynekSala_id_budynekidBudynku, long budynekSala_id_salaidSali, Date dataZajec, Time godzinaZajec);
 
     Optional<Zajecia> findByGrupa_IdGrupyAndDataZajecEqualsAndGodzinaZajecEquals(Integer integer, Date date, Time time);
 

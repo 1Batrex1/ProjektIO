@@ -66,8 +66,7 @@ public class PracownikController {
         Optional<Zajecia> zajecia3 = zajeciaRepository.findByGrupa_IdGrupyAndDataZajecEqualsAndGodzinaZajecEquals(Integer.valueOf(grupa),date,time);
         if(zajecia1.isPresent() || zajecia2.isPresent() || zajecia3.isPresent())
         {
-            System.out.println("Znalazłem");
-            return "redirect:/";
+            return "redirect:/ustalaniePlanu";
 
         }
 
