@@ -14,4 +14,7 @@ public class BudynekSala {
 
     @EmbeddedId
     private BudynekSalaId id;
+
+    @Column(name = "pojemnosc_sali")
+    private int pojemnoscSali;
 }

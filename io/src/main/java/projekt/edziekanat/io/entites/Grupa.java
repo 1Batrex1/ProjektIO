@@ -17,9 +17,6 @@ public class Grupa {
     @Column(name = "id_grupy")
     private int idGrupy;
 
-    @ManyToOne
-    @JoinColumn(name = "id_wykladowcy")
-    private Wykladowca wykladowca;
 
     @OneToMany(mappedBy = "grupa")
     List<Student> studentList;
