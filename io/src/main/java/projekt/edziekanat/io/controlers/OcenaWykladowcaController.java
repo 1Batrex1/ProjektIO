@@ -17,6 +17,7 @@ import projekt.edziekanat.io.entites.Wykladowca;
 import projekt.edziekanat.io.entites.Zajecia;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class OcenaWykladowcaController {
@@ -52,8 +53,8 @@ public class OcenaWykladowcaController {
     public String wybierzZajecia(Model theModel) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Wykladowca wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(Integer.parseInt(authentication.getName()));
-        int idWykladowcy = wykladowca.getIndexWykladowcy();
+        Optional<Wykladowca> wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(Integer.parseInt(authentication.getName()));
+        int idWykladowcy = wykladowca.get().getIndexWykladowcy();
         List<Zajecia> zajeciaList = zajeciaRepository.findDistinctByWykladowca_IndexWykladowcy(idWykladowcy);
         for (int i = 0; i < zajeciaList.size(); i++) {
             for (int j = 0; j < zajeciaList.size(); j++) {
@@ -100,14 +101,27 @@ public class OcenaWykladowcaController {
     public String wystawOcene(@ModelAttribute("ocena") Ocena ocena) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        int idWykladowcy = Integer.parseInt(authentication.getName());
+        int idOsoby = Integer.parseInt(authentication.getName());
 
         ocena.setStudent(studentRepository.findByIndexStudenta(indexStudenta).get());
         ocena.setPrzedmiot(przedmiotRepository.findByIdPrzedmiotu(idPrzedmiotu).get());
-        ocena.setWykladowca(wykladowcaRepository.findWykladowcaByOsobaId(idWykladowcy));
+        ocena.setWykladowca(wykladowcaRepository.findWykladowcaByOsobaId(idOsoby).get());
 
         ocenaRepository.save(ocena);
 
         return "redirect:/wybierzZajecia";
+    }
+    @GetMapping("/grafik")
+    public String wyswietlGrafik(Model theModel)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int idOsoby = Integer.parseInt(authentication.getName());
+
+        Optional<Wykladowca> wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(idOsoby);
+        List<Zajecia> zajeciaList = zajeciaRepository.findAllByWykladowca_IndexWykladowcy(wykladowca.get().getIndexWykladowcy());
+
+        theModel.addAttribute("zajecia",zajeciaList);
+
+        return "grafik";
     }
 }

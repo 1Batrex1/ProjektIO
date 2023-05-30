@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grafik</title>
+</head>
+<body>
+
+
+        <table border="1">
+            <tr>
+                <th>Nazwa Przedmiotu</th>
+                <th>Grupa</th>
+                <th>Budynek</th>
+                <th>Sala</th>
+                <th>Data</th>
+                <th>Godzina</th>
+
+            </tr>
+            <tr th:each="tempZajecia : ${zajecia}" style="text-align: center">
+                    <td th:text="${tempZajecia.getPrzedmiot().getNazwaPrzedmiotu()}"></td>
+                    <td th:text="${tempZajecia.getGrupa().getIdGrupy()}"></td>
+                    <td th:text="${tempZajecia.getBudynekSala().getId().getBudynekidBudynku()}"></td>
+                    <td th:text="${tempZajecia.getBudynekSala().getId().getSalaidSali()}"></td>
+                    <td class ="data" th:text="${tempZajecia.getDataZajec()}"></td>
+                    <td th:text="${tempZajecia.getGodzinaZajec()}"></td>
+
+            </tr>
+        </table>
+
+        <script>
+            window.addEventListener('load', function() {
+                var cells = document.querySelectorAll('table td.data');
+
+                cells.forEach(function(cell) {
+                    var cellText = cell.textContent;
+
+
+                    var dateRegex = /^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d$/;
+                    if (dateRegex.test(cellText)) {
+                        var formattedDate = cellText.split(' ')[0];
+                        cell.textContent = formattedDate;
+                    }
+                });
+            });
+        </script>
+</body>
+</html>
