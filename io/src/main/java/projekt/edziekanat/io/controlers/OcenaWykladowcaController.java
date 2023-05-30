@@ -8,14 +8,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import projekt.edziekanat.io.dao.OcenaRepository;
-import projekt.edziekanat.io.dao.StudentRepository;
-import projekt.edziekanat.io.dao.WykladowcaRepository;
-import projekt.edziekanat.io.entites.Grupa;
+import projekt.edziekanat.io.dao.*;
+import projekt.edziekanat.io.entites.Ocena;
 import projekt.edziekanat.io.entites.Student;
 import projekt.edziekanat.io.entites.Wykladowca;
+import projekt.edziekanat.io.entites.Zajecia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,58 +25,91 @@ public class OcenaWykladowcaController {
     WykladowcaRepository wykladowcaRepository;
     StudentRepository studentRepository;
     OcenaRepository ocenaRepository;
+
+    ZajeciaRepository zajeciaRepository;
+    PrzedmiotRepository przedmiotRepository;
     EntityManager entityManager;
+
+    private int idPrzedmiotu;
+    private int idOceny = 1;
 
     @Autowired
     public OcenaWykladowcaController(WykladowcaRepository wykladowcaRepository,
                                      StudentRepository studentRepository,
                                      OcenaRepository ocenaRepository,
+                                     ZajeciaRepository zajeciaRepository,
+                                     PrzedmiotRepository przedmiotRepository,
                                      EntityManager entityManager) {
         this.wykladowcaRepository = wykladowcaRepository;
         this.studentRepository = studentRepository;
         this.ocenaRepository = ocenaRepository;
+        this.zajeciaRepository = zajeciaRepository;
+        this.przedmiotRepository = przedmiotRepository;
         this.entityManager = entityManager;
     }
 
 
-    @GetMapping("/wybierzGrupe")
-    public String wybierzGrupe(Model theModel) {
-        TypedQuery<Grupa> theQuery = entityManager.createQuery("FROM Grupa", Grupa.class);
+    @GetMapping("/wybierzZajecia")
+    public String wybierzZajecia(Model theModel) {
+        TypedQuery<Zajecia> theQuery = entityManager.createQuery("FROM Zajecia ", Zajecia.class);
 
-        List<Grupa> listaGrup = new ArrayList<>();
+        List<Zajecia> listaZajec = new ArrayList<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Wykladowca wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(Integer.parseInt(authentication.getName()));
         int idWykladowcy = wykladowca.getIndexWykladowcy();
 
-        for (Grupa grupa: theQuery.getResultList()) {
-            if (grupa.getWykladowca().getIndexWykladowcy() == idWykladowcy) {
-                listaGrup.add(grupa);
+       for (Zajecia zajecia: theQuery.getResultList()) {
+            if (zajecia.getWykladowca().getIndexWykladowcy() == idWykladowcy) {
+                listaZajec.add(zajecia);
             }
         }
 
-        List<Integer> roki = new ArrayList<>();
-        for (Grupa grupa : listaGrup) {
-            roki.add(Character.getNumericValue(Integer.toString(grupa.getIdGrupy()).toCharArray()[0]));
-        }
+        theModel.addAttribute("listaZajec", listaZajec);
 
-        theModel.addAttribute("listaGrup", listaGrup);
-        theModel.addAttribute("listaRokow", roki);
-
-        return "wybor-grupy";
+        return "wybor-zajec";
     }
 
     @GetMapping("/listaStudentow")
-    public String listaStudentow(@RequestParam("idGrupy") int theId, Model theModel) {
-        List<Student> student = studentRepository.findAllByIdGrupy(theId);
-        theModel.addAttribute("listaStudentow", student);
+    public String listaStudentow(@RequestParam("idGrupy") int grupaId,
+                                 @RequestParam("idPrzedmiotu") int przedmiotId,
+                                 Model theModel) {
+        List<Student> students = studentRepository.findAllByGrupa_IdGrupy(grupaId);
+        theModel.addAttribute("listaStudentow", students);
+
+        idPrzedmiotu = przedmiotId;
 
         return "lista-studentow";
     }
 
+
     // dodac przed jeszcze wyborem grupy wybor przedmiotu i dopiero zaimplementowac metode nizej
-    @PostMapping("/wystawOcene")
-    public String wystawOcene(@RequestParam("idStudenta") int theId) {
+    @GetMapping("/formularzOceny")
+    public String formularzOceny(@RequestParam("indexStudenta") int indexStudenta,
+                              Model theModel) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int idWykladowcy = Integer.parseInt(authentication.getName());
+
+        Ocena ocena = new Ocena();
+        ocena.setId(idOceny);
+        ocena.setStudent(studentRepository.findByIndexStudenta(indexStudenta).get());
+        ocena.setPrzedmiot(przedmiotRepository.findByIdPrzedmiotu(idPrzedmiotu).get());
+        ocena.setWykladowca(wykladowcaRepository.findWykladowcaByOsobaId(idWykladowcy));
+
+        idOceny++;
+
+        theModel.addAttribute("ocena", ocena);
 
         return "wystawianie-ocen";
+    }
+
+    @PostMapping("/wystawOcene")
+    public String wystawOcene(@ModelAttribute("ocena") Ocena ocena) {
+
+        // nie dziala dodawanie obiektu do bazy danych
+        ocena.getStudent().getOcena().add(ocena);
+        ocenaRepository.save(ocena);
+
+        return "redirect:/wybierzZajecia";
     }
 }

@@ -27,4 +27,14 @@ public class Obecnosc {
     @ManyToOne
     @JoinColumn(name = "id_studenta")
     Student student;
+
+    @Override
+    public String toString() {
+        return "Obecnosc{" +
+                "idObecnosc=" + idObecnosc +
+                ", obecnosc=" + obecnosc +
+                ", zajecia=" + zajecia +
+                ", student=" + student +
+                '}';
+    }
 }

@@ -27,10 +27,10 @@
         <td th:text="${tempStudent.getOsoba().getImie()} + ' ' + ${tempStudent.getOsoba().getNazwisko()}"></td>
         <td th:text="${tempStudent.getRok()}"></td>
         <td th:text="${tempStudent.getSemestr()}"></td>
-        <td th:text="${tempStudent.getIdGrupy()}"></td>
+        <td th:text="${tempStudent.getGrupa().getIdGrupy()}"></td>
         <td th:text="${tempStudent.getSpecjalnosc()}"></td>
         <td>
-            <a th:href="@{/}" class="btn btn-info btn-sm">
+            <a th:href="@{/formularzOceny(indexStudenta=${tempStudent.getIndexStudenta()})}" class="btn btn-info btn-sm">
                 Wystaw ocenę
             </a>
         </td>
@@ -39,7 +39,7 @@
     </tbody>
 </table>
 
-<form action="#" th:action="@{/wybierzGrupe}" method="GET">
+<form action="#" th:action="@{/wybierzZajecia}" method="GET">
     <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Powrót"/>
 </form>
 

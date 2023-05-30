@@ -21,6 +21,11 @@ public class Grupa {
     @OneToMany(mappedBy = "grupa")
     List<Student> studentList;
 
-
-
+    @Override
+    public String toString() {
+        return "Grupa{" +
+                "idGrupy=" + idGrupy +
+                ", studentList=" + studentList +
+                '}';
+    }
 }

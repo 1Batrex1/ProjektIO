@@ -20,7 +20,7 @@ public class SecurityConfig {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "SELECT id_osoba, haslo, aktywne FROM osoba WHERE CAST(id_osoba as varchar) = ?"
+                "SELECT id_osoba, haslo, aktywny FROM osoba WHERE CAST(id_osoba as varchar) = ?"
         );
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
                 "SELECT id_osoba, rola FROM rola WHERE CAST(id_osoba as varchar) = ?"

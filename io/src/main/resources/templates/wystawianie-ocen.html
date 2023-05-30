@@ -7,33 +7,47 @@
 </head>
 <body>
 <div class="container">
-    <h3>Employee Directory</h3>
+    <h3 th:text="${ocena.getPrzedmiot().getNazwaPrzedmiotu()}
+                + ', ' + ${ocena.getPrzedmiot().getTypZajec()}"></h3>
     <hr>
 
-    <p class="h4 mb-4">Save Employee</p>
+    <p class="h4 mb-4" th:text="${ocena.student.getOsoba().getImie()}
+                        + ' ' + ${ocena.student.getOsoba().getNazwisko()}
+                        + ', ' + ${ocena.student.getIndexStudenta()}"></p>
 
-    <!-- Ponizej tylko przyklad -->
-  <!--  <form action="#" th:action="@{/employees/save}"
-          th:object="${employee}" method="POST">
+    <form action="#" th:action="@{/wystawOcene}"
+          th:object="${ocena}" method="POST">
 
-        &lt;!&ndash; Add hidden form field to handle the update &ndash;&gt;
-        <input type="hidden" th:field="*{id}">
+        <!-- Add hidden form field to handle the update -->
+        <!--<input type="hidden" th:field="*{id}">
 
-        <input type="text" th:field="*{firstName}"
-               class="form-control mb-4 w-25" placeholder="First name">
+        <input type="hidden" th:field="*{student}">-->
 
-        <input type="text" th:field="*{lastName}"
-               class="form-control mb-4 w-25" placeholder="Last name">
+       <!-- <input type="hidden" th:field="*{przedmiot.getIdPrzedmiotu()}">
 
-        <input type="text" th:field="*{email}"
-               class="form-control mb-4 w-25" placeholder="Email">
+        <input type="hidden" th:field="*{wykladowca.getIndexWykladowcy()}">-->
 
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <input type="text" th:field="*{waga}"
+               class="form-control mb-4 w-25" placeholder="Waga">
 
-    </form>-->
+        <input type="text" th:field="*{uwaga}"
+               class="form-control mb-4 w-25" placeholder="Dodatkowe uwagi">
+
+        <input type="text" th:field="*{typ}"
+               class="form-control mb-4 w-25" placeholder="Typ (Cząstkowa/Końcowa)">
+
+        <input type="text" th:field="*{wartosc}"
+               class="form-control mb-4 w-25" placeholder="Wartość oceny">
+
+        <button type="submit" class="btn btn-info col-2">Zapisz</button>
+
+    </form>
 
     <hr>
-    <a th:href="@{/employees/list}">Back to Employees List</a>
+    <form action="#" th:action="@{/wybierzZajecia}" method="GET">
+        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Powrót"/>
+    </form>
+
 </div>
 </body>
 </html>

@@ -36,14 +36,23 @@ public class Zajecia {
 
     //Dodać id sali
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "budynekid_budynku",referencedColumnName = "budynekidBudynku"),
-            @JoinColumn(name = "salaid_sali", referencedColumnName = "salaid_sali")
+            @JoinColumn(name = "budynekidBudynku",referencedColumnName = "Budynekid_budynku"),
+            @JoinColumn(name = "salaid_sali", referencedColumnName = "Salaid_sali")
     })
-    BudynekSala budynekSala;
+    BudynekSala budynekSala;*/
     //Dodać id budynku
 
 
-
+    @Override
+    public String toString() {
+        return "Zajecia{" +
+                "idZajec=" + idZajec +
+                ", dataZajec=" + dataZajec +
+                ", przedmiot=" + przedmiot +
+                ", wykladowca=" + wykladowca +
+                ", grupa=" + grupa +
+                '}';
+    }
 }

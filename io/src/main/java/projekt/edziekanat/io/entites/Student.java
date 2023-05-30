@@ -21,14 +21,14 @@ public class Student {
     @Column(name = "semestr")
     private int semestr;
 
-    @Column(name = "rok")
+    @Column(name = "rok_akademicki")
     private int rok;
 
     @Column(name = "specjalnosc")
     private String specjalnosc;
 
-    @Column(name = "id_grupy")
-    private int idGrupy;
+    @Column(name = "rok_rozpoczecia")
+    private int rokRozpoczecia;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_osoba")
@@ -40,6 +40,7 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "id_grupy")
     Grupa grupa;
+
     @Override
     public String toString() {
         return "Student{" +
@@ -47,9 +48,10 @@ public class Student {
                 ", semestr=" + semestr +
                 ", rok=" + rok +
                 ", specjalnosc='" + specjalnosc + '\'' +
-                ", idGrupy=" + idGrupy +
+                ", rokRozpoczecia=" + rokRozpoczecia +
                 ", osoba=" + osoba +
                 ", ocena=" + ocena +
+                ", grupa=" + grupa +
                 '}';
     }
 }

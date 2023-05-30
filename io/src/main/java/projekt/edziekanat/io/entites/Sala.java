@@ -14,5 +14,12 @@ public class Sala {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_sali")
     private int idSali;
+
+    @Override
+    public String toString() {
+        return "Sala{" +
+                "idSali=" + idSali +
+                '}';
+    }
 }
 

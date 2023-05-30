@@ -25,5 +25,13 @@ public class Osoba {
     @Column(name = "pesel")
     private String pesel;
 
-
+    @Override
+    public String toString() {
+        return "Osoba{" +
+                "id=" + id +
+                ", imie='" + imie + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                ", pesel='" + pesel + '\'' +
+                '}';
+    }
 }

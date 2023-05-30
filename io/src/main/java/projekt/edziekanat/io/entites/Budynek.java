@@ -14,4 +14,11 @@ public class Budynek {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_budynku")
     private int idBudynku;
+
+    @Override
+    public String toString() {
+        return "Budynek{" +
+                "idBudynku=" + idBudynku +
+                '}';
+    }
 }

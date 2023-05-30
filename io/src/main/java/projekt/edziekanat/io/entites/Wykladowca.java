@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 
 @Entity
 @Table(name = "wykładowca")
@@ -21,5 +19,11 @@ public class Wykladowca {
     @JoinColumn(name = "id_osoba")
     private Osoba osoba;
 
-
+    @Override
+    public String toString() {
+        return "Wykladowca{" +
+                "indexWykladowcy=" + indexWykladowcy +
+                ", osoba=" + osoba +
+                '}';
+    }
 }

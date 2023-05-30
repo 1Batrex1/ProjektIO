@@ -17,4 +17,12 @@ public class BudynekSala {
 
     @Column(name = "pojemnosc_sali")
     private int pojemnoscSali;
+
+    @Override
+    public String toString() {
+        return "BudynekSala{" +
+                "id=" + id +
+                ", pojemnoscSali=" + pojemnoscSali +
+                '}';
+    }
 }
