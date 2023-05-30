@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -15,12 +16,15 @@ public class Zajecia {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_zajęc")
     private int idZajec;
 
     @Column(name = "data")
     Date dataZajec;
+
+    @Column(name = "godzina_zajęć")
+    Time godzinaZajec;
 
     @ManyToOne
     @JoinColumn(name ="id_przedmiotu")
@@ -38,7 +42,7 @@ public class Zajecia {
     @ManyToOne
     @JoinColumns({
             @JoinColumn(name = "id_budynku",referencedColumnName = "budynekidBudynku"),
-            @JoinColumn(name = "id_sali",referencedColumnName = "salaid_sali")
+            @JoinColumn(name = "id_sali",referencedColumnName = "salaidSali")
     })
     BudynekSala budynekSala;
 

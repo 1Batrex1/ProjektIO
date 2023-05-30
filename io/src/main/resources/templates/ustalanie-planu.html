@@ -16,8 +16,8 @@
             <p>Wybierz Budynek i salę</p>
             <select name="budynekSala">
                 <option th:each="tempBudynekSala : ${BudynekSala}"
-                        th:value="${tempBudynekSala.getId().getSalaid_sali()}+ ' ' + ${tempBudynekSala.getId().getBudynekidBudynku()}"
-                        th:text="'Budynek '  +${tempBudynekSala.getId().getBudynekidBudynku()}+ ' Sala ' + ${tempBudynekSala.getId().getSalaid_sali()} + ' Pojemność ' + ${tempBudynekSala.getPojemnoscSali()}"></option>
+                        th:value="${tempBudynekSala.getId().getBudynekidBudynku()}+ ' ' + ${tempBudynekSala.getId().getSalaidSali()}"
+                        th:text="'Budynek '  +${tempBudynekSala.getId().getBudynekidBudynku()}+ ' Sala ' + ${tempBudynekSala.getId().getSalaidSali()} + ' Pojemność ' + ${tempBudynekSala.getPojemnoscSali()}"></option>
             </select>
 
             <p>Wybierz Grupę</p>
@@ -27,11 +27,13 @@
 
             <p>Wybierz Przedmiot</p>
             <select name="przedmiot">
-                <option th:each="tempPrzedmiot : ${Przedmioty}" th:text="${tempPrzedmiot.getNazwaPrzedmiotu()}"></option>
+                <option
+                        th:value="${tempPrzedmiot.getIdPrzedmiotu()}"
+                        th:each="tempPrzedmiot : ${Przedmioty}" th:text="${tempPrzedmiot.getNazwaPrzedmiotu()}"></option>
             </select>
 
             <p>Wybierz Datę</p>
-            <input type="datetime-local" name="data" id="data" onchange="validateTime(this)"/>
+            <input type="datetime-local" name="data" id="data" onchange="validateTime(this)" th:required="required"/>
 
             <br>
             <button type="submit">Save</button>
