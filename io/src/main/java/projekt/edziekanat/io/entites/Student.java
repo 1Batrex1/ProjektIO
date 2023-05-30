@@ -27,6 +27,9 @@ public class Student {
     @Column(name = "specjalnosc")
     private String specjalnosc;
 
+    @Column(name = "id_grupy")
+    private int idGrupy;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_osoba")
     private Osoba osoba;
@@ -41,6 +44,9 @@ public class Student {
                 ", semestr=" + semestr +
                 ", rok=" + rok +
                 ", specjalnosc='" + specjalnosc + '\'' +
+                ", idGrupy=" + idGrupy +
+                ", osoba=" + osoba +
+                ", ocena=" + ocena +
                 '}';
     }
 }

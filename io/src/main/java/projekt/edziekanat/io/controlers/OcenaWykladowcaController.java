@@ -8,10 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import projekt.edziekanat.io.dao.OcenaRepository;
 import projekt.edziekanat.io.dao.StudentRepository;
 import projekt.edziekanat.io.dao.WykladowcaRepository;
 import projekt.edziekanat.io.entites.Grupa;
+import projekt.edziekanat.io.entites.Student;
 import projekt.edziekanat.io.entites.Wykladowca;
 
 import java.util.ArrayList;
@@ -44,21 +47,36 @@ public class OcenaWykladowcaController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Wykladowca wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(Integer.parseInt(authentication.getName()));
         int idWykladowcy = wykladowca.getIndexWykladowcy();
-        System.out.println(idWykladowcy);
 
         for (Grupa grupa: theQuery.getResultList()) {
-            System.out.println(grupa.getWykladowca().getIndexWykladowcy());
-            System.out.println(idWykladowcy);
             if (grupa.getWykladowca().getIndexWykladowcy() == idWykladowcy) {
                 listaGrup.add(grupa);
             }
-
         }
 
-        System.out.println(listaGrup);
+        List<Integer> roki = new ArrayList<>();
+        for (Grupa grupa : listaGrup) {
+            roki.add(Character.getNumericValue(Integer.toString(grupa.getIdGrupy()).toCharArray()[0]));
+        }
+
         theModel.addAttribute("listaGrup", listaGrup);
+        theModel.addAttribute("listaRokow", roki);
 
         return "wybor-grupy";
+    }
 
+    @GetMapping("/listaStudentow")
+    public String listaStudentow(@RequestParam("idGrupy") int theId, Model theModel) {
+        List<Student> student = studentRepository.findAllByIdGrupy(theId);
+        theModel.addAttribute("listaStudentow", student);
+
+        return "lista-studentow";
+    }
+
+    // dodac przed jeszcze wyborem grupy wybor przedmiotu i dopiero zaimplementowac metode nizej
+    @PostMapping("/wystawOcene")
+    public String wystawOcene(@RequestParam("idStudenta") int theId) {
+
+        return "wystawianie-ocen";
     }
 }

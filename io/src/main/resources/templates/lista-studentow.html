@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wybór studenta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th>Indeks</th>
+        <th>Imię i nazwisko</th>
+        <th>Rok</th>
+        <th>Semestr</th>
+        <th>Grupa</th>
+        <th>Specjalność</th>
+        <th>Wybór</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="tempStudent: ${listaStudentow}">
+
+        <td th:text="${tempStudent.getIndexStudenta()}"></td>
+        <td th:text="${tempStudent.getOsoba().getImie()} + ' ' + ${tempStudent.getOsoba().getNazwisko()}"></td>
+        <td th:text="${tempStudent.getRok()}"></td>
+        <td th:text="${tempStudent.getSemestr()}"></td>
+        <td th:text="${tempStudent.getIdGrupy()}"></td>
+        <td th:text="${tempStudent.getSpecjalnosc()}"></td>
+        <td>
+            <a th:href="@{/}" class="btn btn-info btn-sm">
+                Wystaw ocenę
+            </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/wybierzGrupe}" method="GET">
+    <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Powrót"/>
+</form>
+
+</body>
+</html>

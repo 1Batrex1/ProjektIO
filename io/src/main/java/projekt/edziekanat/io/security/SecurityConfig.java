@@ -37,6 +37,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/sprawdz-oceny/**").hasRole("STUDENT")
                                 .requestMatchers(HttpMethod.GET, "/wybor-przedmiotu/**").hasRole("STUDENT")
                                 .requestMatchers(HttpMethod.GET, "/wybierzGrupe/**").hasRole("WYKŁADOWCA")
+                                .requestMatchers(HttpMethod.GET, "/listaStudentow/**").hasRole("WYKŁADOWCA")
                                 .anyRequest().authenticated()
 
 

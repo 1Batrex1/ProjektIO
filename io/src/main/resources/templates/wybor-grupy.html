@@ -17,13 +17,12 @@
     </thead>
 
     <tbody>
-    <tr th:each="tempGrupa : ${listaGrup}">
+    <tr th:each="tempGrupa, iterStat: ${listaGrup}">
 
-        <td th:text="${tempGrupa.getIdGrupy()}" />
-
+        <td th:text="${listaRokow.get(iterStat.index)}"></td>
+        <td th:text="${tempGrupa.getIdGrupy()}"></td>
         <td>
-            <a th:href="@{/wyswietlOceny(przedmiotId=${tempPrzedmiot.getIdPrzedmiotu()})}"
-               class="btn btn-info btn-sm">
+            <a th:href="@{/listaStudentow(idGrupy=${tempGrupa.getIdGrupy()})}" class="btn btn-info btn-sm">
                 Wybierz
             </a>
         </td>
@@ -31,6 +30,10 @@
     </tr>
     </tbody>
 </table>
+
+<form action="#" th:action="@{/}" method="GET">
+    <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Powrót"/>
+</form>
 
 </body>
 </html>
