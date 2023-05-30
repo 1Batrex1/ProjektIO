@@ -24,11 +24,14 @@
         <input type="text" th:field="*{uwaga}"
                class="form-control mb-4 w-25" placeholder="Dodatkowe uwagi">
 
-        <select th:field="*{typ}">
-            <option th:value="true">Końcowa</option>
-            <option th:value="false">Cząstkowka</option>
-        </select>
-
+        <div class="row">
+            <div class="col-3">
+                <select th:field="*{typ}" class="form-select">
+                    <option th:value="true">Końcowa</option>
+                    <option th:value="false">Cząstkowka</option>
+                </select>
+            </div>
+        </div><br>
 
         <input type="text" th:field="*{wartosc}"
                class="form-control mb-4 w-25" placeholder="Wartość oceny">
