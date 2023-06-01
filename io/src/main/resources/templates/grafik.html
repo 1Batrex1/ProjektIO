@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Grafik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
 
 
-        <table border="1">
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
             <tr>
                 <th>Nazwa Przedmiotu</th>
                 <th>Grupa</th>
@@ -15,8 +17,9 @@
                 <th>Sala</th>
                 <th>Data</th>
                 <th>Godzina</th>
-
             </tr>
+    </thead>
+    <tbody>
             <tr th:each="tempZajecia : ${zajecia}" style="text-align: center">
                     <td th:text="${tempZajecia.getPrzedmiot().getNazwaPrzedmiotu()}"></td>
                     <td th:text="${tempZajecia.getGrupa().getIdGrupy()}"></td>
@@ -26,7 +29,12 @@
                     <td th:text="${tempZajecia.getGodzinaZajec()}"></td>
 
             </tr>
+    </tbody>
         </table>
+
+<form action="#" th:action="@{/}" method="GET">
+    <input type="submit" style="position: absolute; left: 50%;" class="btn btn-primary" value="Powrót"/>
+</form>
 
         <script>
             window.addEventListener('load', function() {
