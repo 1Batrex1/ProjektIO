@@ -17,6 +17,7 @@ import projekt.edziekanat.io.entites.Wykladowca;
 import projekt.edziekanat.io.entites.Zajecia;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -57,8 +58,8 @@ public class OcenaWykladowcaController {
         int idWykladowcy = wykladowca.get().getIndexWykladowcy();
         List<Zajecia> zajeciaList = zajeciaRepository.findDistinctByWykladowca_IndexWykladowcy(idWykladowcy);
         for (int i = 0; i < zajeciaList.size(); i++) {
-            for (int j = 0; j < zajeciaList.size(); j++) {
-                if (zajeciaList.get(i) == zajeciaList.get(j) && zajeciaList.size() > 1) {
+            for (int j = i; j < zajeciaList.size(); j++) {
+                if (Objects.equals(zajeciaList.get(i).getPrzedmiot().getNazwaPrzedmiotu(), zajeciaList.get(j).getPrzedmiot().getNazwaPrzedmiotu()) && Objects.equals(zajeciaList.get(i).getPrzedmiot().getTypZajec(), zajeciaList.get(j).getPrzedmiot().getTypZajec()) && zajeciaList.size() > 1) {
                     zajeciaList.remove(j);
                 }
             }
