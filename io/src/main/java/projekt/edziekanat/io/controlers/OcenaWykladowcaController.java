@@ -59,7 +59,9 @@ public class OcenaWykladowcaController {
         List<Zajecia> zajeciaList = zajeciaRepository.findDistinctByWykladowca_IndexWykladowcy(idWykladowcy);
         for (int i = 0; i < zajeciaList.size(); i++) {
             for (int j = i; j < zajeciaList.size(); j++) {
-                if (Objects.equals(zajeciaList.get(i).getPrzedmiot().getNazwaPrzedmiotu(), zajeciaList.get(j).getPrzedmiot().getNazwaPrzedmiotu()) && Objects.equals(zajeciaList.get(i).getPrzedmiot().getTypZajec(), zajeciaList.get(j).getPrzedmiot().getTypZajec()) && zajeciaList.size() > 1) {
+                if (Objects.equals(zajeciaList.get(i).getPrzedmiot().getNazwaPrzedmiotu(), zajeciaList.get(j).getPrzedmiot().getNazwaPrzedmiotu()) &&
+                        Objects.equals(zajeciaList.get(i).getPrzedmiot().getTypZajec(), zajeciaList.get(j).getPrzedmiot().getTypZajec()) &&
+                        Objects.equals(zajeciaList.get(i).getGrupa(), zajeciaList.get(j).getGrupa()) ) {
                     zajeciaList.remove(j);
                 }
             }
