@@ -82,7 +82,7 @@ public class OcenaStudentController {
 
         theModel.addAttribute("listaPrzedmiotow", przedmioty);
         theModel.addAttribute("listaOcen", ocenyPrzedmiotu);
-        theModel.addAttribute("i", przedmioty.size());
+//        theModel.addAttribute("i", przedmioty.size());
 
         return "wybor-przedmiotu-do-wyswietlenia-ocen";
     }
