@@ -109,6 +109,14 @@ public class OcenaWykladowcaController {
         ocena.setPrzedmiot(przedmiotRepository.findByIdPrzedmiotu(idPrzedmiotu).get());
         ocena.setWykladowca(wykladowcaRepository.findWykladowcaByOsobaId(idOsoby).get());
 
+        if (ocena.isTyp()) {
+            Optional<Ocena> tempOcena = ocenaRepository.findByStudent_IndexStudentaAndPrzedmiot_IdPrzedmiotuAndTyp(indexStudenta, idPrzedmiotu, true);
+            if (tempOcena.isPresent()) {
+
+                return "redirect:/formularzOceny?indexStudenta=" + indexStudenta;
+            }
+        }
+
         ocenaRepository.save(ocena);
 
         return "redirect:/wybierzZajecia";

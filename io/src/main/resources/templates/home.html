@@ -27,33 +27,83 @@ Typ konta: <span sec:authentication="principal.authorities"></span>
 <!-- Sprawdzenie ocen studenta -->
 <div sec:authorize="hasRole('STUDENT')">
     <form action="#" th:action="@{/wybierzPrzedmiot}" method="GET">
-        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Oceny"/>
+        <input type="submit" style="position: absolute; margin-left: 51%" class="btn btn-primary" value="Oceny"/>
     </form>
+
+<!-- Do pełnej wersji -->
+  <!--  <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 43.5%" class="btn btn-primary" value="Plan zajęć"/>
+    </form>
+
+    <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 50.5%" class="btn btn-primary" value="Obecności"/>
+    </form>
+
+    <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 58%" class="btn btn-primary" value="Kontakt z dziekanatem"/>
+    </form>-->
+    <!-- Koniec pełnej wersji -->
 </div>
 
 <!-- Wystawienie ocen przez wykładowcę -->
 <div sec:authorize="hasRole('WYKŁADOWCA')">
     <form action="#" th:action="@{/wybierzZajecia}" method="GET" style="float: left; margin-left: 2%">
-        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Wystawianie ocen"/>
+        <input type="submit" style="position: absolute; margin-left: 40%" class="btn btn-primary" value="Wystawianie ocen"/>
     </form>
 
 <!-- Sprawdzenie grafiku zajęć przez wykładowcę -->
     <form action="#" th:action="@{/grafik}" method="GET" style="float: left; margin-left: 2%">
-        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Grafik zajęć"/>
+        <input type="submit" style="position: absolute; margin-left: 53%" class="btn btn-primary" value="Grafik zajęć"/>
     </form>
+
+<!-- Do pełnej wersji -->
+   <!-- <form action="#" th:action="@{/}" method="GET" style="float: left; margin-left: 2%">
+        <input type="submit" style="position: absolute; margin-left: 52.5%" class="btn btn-primary" value="Wstaw ocecność"/>
+    </form>
+
+    <form action="#" th:action="@{/}" method="GET" style="float: left; margin-left: 2%">
+        <input type="submit" style="position: absolute; margin-left: 62.5%" class="btn btn-primary" value="Kontakt"/>
+    </form>-->
 </div>
+<!-- Koniec pełnej wersji -->
 
 <!-- Ustalanie planu zajęć przez pracownika dziekanatu -->
 <div sec:authorize="hasRole('PRACOWNIK_DZIEKANATU')">
     <form action="#" th:action="@{/ustalaniePlanu}" method="GET">
-        <input type="submit" style="margin-left: 2%" class="btn btn-primary" value="Ustal plan zajęć"/>
+        <input type="submit" style="position: absolute; margin-left: 49%" class="btn btn-primary" value="Ustal plan zajęć"/>
     </form>
+
+<!-- Do pełnej wersji -->
+    <!--<form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 30%" class="btn btn-primary" value="Dodaj studenta"/>
+    </form>
+
+    <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 40%" class="btn btn-primary" value="Usuń studenta"/>
+    </form>
+
+    <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 49%" class="btn btn-primary" value="Ułóż grupę"/>
+    </form>
+
+    <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 56.5%" class="btn btn-primary" value="Zarządzaj wydziałem"/>
+    </form>
+
+    <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 68.5%" class="btn btn-primary" value="Sprawdź plan"/>
+    </form>
+
+    <form action="#" th:action="@{/}" method="GET">
+        <input type="submit" style="position: absolute; margin-left: 77%" class="btn btn-primary" value="Kontakt"/>
+    </form>-->
 </div>
+<!-- Koniec pełnej wersji -->
 
 <br>
 
 <!-- Add o logout button -->
-<br>
+<br><br>
 <form action="#" th:action="@{/logout}" method="POST">
     <input type="submit" style="margin-left: 50%" class="btn btn-danger" value="Wyloguj się"/>
 </form>
