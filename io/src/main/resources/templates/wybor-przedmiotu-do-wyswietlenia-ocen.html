@@ -23,7 +23,7 @@
 
         <td>
         <span th:each="j : ${#numbers.sequence(0, i)}">
-            <div th:text="${listaOcen.get(0).get(j).getWartosc()}"/>
+            <font th:text="${listaOcen.get(tempPrzedmiotStat.index).get(j).getWartosc()}"/>
         </span>
         </td>
             <td>
