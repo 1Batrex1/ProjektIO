@@ -18,7 +18,7 @@
     <form action="#" th:action="@{/wystawOcene}"
           th:object="${ocena}" method="POST">
 
-        <input type="text" th:field="*{waga}"
+        <input type="number" th:field="*{waga}"
                class="form-control mb-4 w-25" placeholder="Waga"/>
 
         <input type="text" th:field="*{uwaga}"
