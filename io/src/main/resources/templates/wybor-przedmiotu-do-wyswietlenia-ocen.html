@@ -24,7 +24,7 @@
         <td>
             <span th:if="${listaOcen.get(tempPrzedmiotStat.index).size()>0}">
                 <span th:each="j : ${#numbers.sequence(0, listaOcen.get(tempPrzedmiotStat.index).size()-1)}">
-                    <span th:text="${listaOcen.get(tempPrzedmiotStat.index).get(j).getWartosc()} + ,"/>
+                    <span th:text="${listaOcen.get(tempPrzedmiotStat.index).get(j).getWartosc()  } + ',' " />
                 </span>
             </span>
         </td>
