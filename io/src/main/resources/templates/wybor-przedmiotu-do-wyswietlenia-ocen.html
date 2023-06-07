@@ -21,11 +21,11 @@
             <td th:text="${tempPrzedmiot.getNazwaPrzedmiotu()}" />
             <td th:text="${tempPrzedmiot.getEcts()}" />
 
-
-        <tr th:each="j : ${#numbers.sequence(0, i)}">
-            <td th:text="${listaOcen.get(0).get(j).getWartosc()}"/>
-        </tr>
-
+        <td>
+        <span th:each="j : ${#numbers.sequence(0, i)}">
+            <div th:text="${listaOcen.get(0).get(j).getWartosc()}"/>
+        </span>
+        </td>
             <td>
                 <a th:href="@{/wyswietlOceny(przedmiotId=${tempPrzedmiot.getIdPrzedmiotu()})}"
                    class="btn btn-info btn-sm">
