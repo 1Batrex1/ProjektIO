@@ -32,7 +32,6 @@ public class OcenaWykladowcaController {
 
     private int idPrzedmiotu;
     private int indexStudenta;
-    private int idOceny = 1;
 
     @Autowired
     public OcenaWykladowcaController(WykladowcaRepository wykladowcaRepository,

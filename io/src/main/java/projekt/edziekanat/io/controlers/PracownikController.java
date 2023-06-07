@@ -19,7 +19,7 @@ import java.util.*;
 @Controller
 public class PracownikController {
 
-
+    boolean error = false;
     WykladowcaRepository wykladowcaRepository;
 
     GrupaRepository grupaRepository;
@@ -35,6 +35,7 @@ public class PracownikController {
     @GetMapping("/ustalaniePlanu")
     public String ustalPlan(Model theModel)
     {
+
         List<Wykladowca> wykladowcaList= wykladowcaRepository.findAll();
         List<Grupa> grupaList = grupaRepository.findAll();
         List<Przedmiot> przedmiotList = przedmiotRepository.findAll();
@@ -43,11 +44,16 @@ public class PracownikController {
         theModel.addAttribute("Wykladowcy",wykladowcaList);
         theModel.addAttribute("Przedmioty",przedmiotList);
         theModel.addAttribute("BudynekSala",budynekSalaList);
+        if (error)
+        {
+            theModel.addAttribute("error",true);
+            error = false;
+        }
         return "ustalanie-planu";
     }
     // Tutaj trzeba dodać ify i zapisać
     @PostMapping("/ustalanie-planu/save")
-    public String zapiszPlan(@RequestParam String wykladowca, @RequestParam String grupa, @RequestParam String przedmiot, @RequestParam String data,@RequestParam String budynekSala) throws ParseException {
+    public String zapiszPlan(Model theModel,@RequestParam String wykladowca, @RequestParam String grupa, @RequestParam String przedmiot, @RequestParam String data,@RequestParam String budynekSala) throws ParseException {
 
         //Konwertowanie daty
         String[] strings = data.split("T");
@@ -66,6 +72,7 @@ public class PracownikController {
         Optional<Zajecia> zajecia3 = zajeciaRepository.findByGrupa_IdGrupyAndDataZajecEqualsAndGodzinaZajecEquals(Integer.valueOf(grupa),date,time);
         if(zajecia1.isPresent() || zajecia2.isPresent() || zajecia3.isPresent())
         {
+            error = true;
             return "redirect:/ustalaniePlanu";
 
         }

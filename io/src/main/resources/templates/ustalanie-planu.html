@@ -8,7 +8,9 @@
 <body>
 <div style="position: absolute; top: 15%; left: 40%;">
         <form action="#" th:action="@{/ustalanie-planu/save}" method="POST">
-
+                <script th:if="${error == true}">
+                    alert("Nie udało się dodać planu zajęć")
+                </script>
             <div class="row">
                 <div class="col-12">
                     <p>Wybierz wykładowcę</p>
@@ -74,6 +76,7 @@
                 if (!allowedHours.includes(selectedHour)) {
                     alert("Dozwolone godziny rozpoczęcia zajęć to :" + allowedHours);
                     input.value = "";
+                    return
                 }
                 if (allowedMinutes != selectedMinutes)
                 {
