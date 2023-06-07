@@ -117,6 +117,10 @@ public class OcenaWykladowcaController {
             }
         }
 
+        if (ocena.getWartosc() == 0) {
+            return "redirect:/formularzOceny?indexStudenta=" + indexStudenta;
+        }
+
         ocenaRepository.save(ocena);
 
         return "redirect:/wybierzZajecia";
