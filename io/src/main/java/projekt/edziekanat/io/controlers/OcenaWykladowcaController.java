@@ -132,7 +132,7 @@ public class OcenaWykladowcaController {
         int idOsoby = Integer.parseInt(authentication.getName());
 
         Optional<Wykladowca> wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(idOsoby);
-        List<Zajecia> zajeciaList = zajeciaRepository.findAllByWykladowca_IndexWykladowcy(wykladowca.get().getIndexWykladowcy());
+        List<Zajecia> zajeciaList = zajeciaRepository.findAllByWykladowca_IndexWykladowcyOrderByDataZajec(wykladowca.get().getIndexWykladowcy());
 
         theModel.addAttribute("zajecia",zajeciaList);
 
