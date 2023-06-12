@@ -19,7 +19,7 @@
           th:object="${ocena}" method="POST">
 
         <input type="number" th:field="*{waga}"
-               class="form-control mb-4 w-25" placeholder="Waga"/>
+               class="form-control mb-4 w-25" placeholder="Waga" required/>
 
         <input type="text" th:field="*{uwaga}"
                class="form-control mb-4 w-25" placeholder="Dodatkowe uwagi"/>
@@ -34,7 +34,7 @@
         </div><br>
 
         <input type="text" th:field="*{wartosc}"
-               class="form-control mb-4 w-25" placeholder="Wartość oceny"/>
+               class="form-control mb-4 w-25" placeholder="Wartość oceny" required/>
 
         <button type="submit" class="btn btn-info col-2">Zapisz</button>
 
