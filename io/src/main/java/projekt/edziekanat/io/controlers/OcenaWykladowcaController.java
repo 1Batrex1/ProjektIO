@@ -16,8 +16,8 @@ import projekt.edziekanat.io.entites.Student;
 import projekt.edziekanat.io.entites.Wykladowca;
 import projekt.edziekanat.io.entites.Zajecia;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -56,16 +56,40 @@ public class OcenaWykladowcaController {
         Optional<Wykladowca> wykladowca = wykladowcaRepository.findWykladowcaByOsobaId(Integer.parseInt(authentication.getName()));
         int idWykladowcy = wykladowca.get().getIndexWykladowcy();
         List<Zajecia> zajeciaList = zajeciaRepository.findDistinctByWykladowca_IndexWykladowcy(idWykladowcy);
+
+        List<Zajecia> zajeciaListTmp = new ArrayList<>();
+
         for (int i = 0; i < zajeciaList.size(); i++) {
-            for (int j = i; j < zajeciaList.size(); j++) {
-                if (Objects.equals(zajeciaList.get(i).getPrzedmiot().getNazwaPrzedmiotu(), zajeciaList.get(j).getPrzedmiot().getNazwaPrzedmiotu()) &&
-                        Objects.equals(zajeciaList.get(i).getPrzedmiot().getTypZajec(), zajeciaList.get(j).getPrzedmiot().getTypZajec()) &&
-                        Objects.equals(zajeciaList.get(i).getGrupa(), zajeciaList.get(j).getGrupa()) ) {
+            for (int j = i + 1; j < zajeciaList.size(); j++) {
+                if(zajeciaList.get(i).getGrupa() == zajeciaList.get(j).getGrupa()
+                    && zajeciaList.get(i).getPrzedmiot().getNazwaPrzedmiotu().equals(zajeciaList.get(j).getPrzedmiot().getNazwaPrzedmiotu())
+                    && zajeciaList.get(i).getPrzedmiot().getTypZajec().equals(zajeciaList.get(j).getPrzedmiot().getTypZajec())) {
                     zajeciaList.remove(j);
+                    i = 0;
                 }
             }
         }
 
+        for (int i = 0; i < zajeciaList.size(); i++) {
+            for (int j = i + 1; j < zajeciaList.size(); j++) {
+                if(zajeciaList.get(i).getGrupa() == zajeciaList.get(j).getGrupa()
+                        && zajeciaList.get(i).getPrzedmiot().getNazwaPrzedmiotu().equals(zajeciaList.get(j).getPrzedmiot().getNazwaPrzedmiotu())
+                        && zajeciaList.get(i).getPrzedmiot().getTypZajec().equals(zajeciaList.get(j).getPrzedmiot().getTypZajec())) {
+                    zajeciaList.remove(j);
+                    i = 0;
+                }
+            }
+        }
+
+        /*for (Zajecia zajecia1: zajeciaList) {
+            for (Zajecia zajecia2: zajeciaListTmp) {
+                if (zajecia1.getPrzedmiot().getNazwaPrzedmiotu().equals(zajecia2.getPrzedmiot().getNazwaPrzedmiotu())
+                    && zajecia1.getPrzedmiot().getTypZajec().equals(zajecia2.getPrzedmiot().getTypZajec())
+                    && zajeciaList.size() > 1) {
+                    zajeciaList.remove(zajecia1);
+                }
+            }
+        }*/
 
         theModel.addAttribute("listaZajec", zajeciaList);
 
